@@ -1,0 +1,4 @@
+# dont forget to add the new views to mysql.
+# mysql> CREATE VIEW v1 AS SELECT * FROM t1;
+
+little light - lewis watson

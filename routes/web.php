@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return [
+        'website' => 'api.markidea.ma',
+        'version' => '1.0.0',
+        'author' => 'Markidea',
+        'email' => 'contact@markidea.ma',
+        'description' => 'Markidea API',
+    ];
 });

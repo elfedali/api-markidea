@@ -1,0 +1,54 @@
+created:
+    - app/Http/Controllers/UserController.php
+    - app/Http/Controllers/CategoryController.php
+    - app/Http/Controllers/ShopController.php
+    - app/Http/Controllers/ImageController.php
+    - app/Http/Controllers/ReviewController.php
+    - database/factories/CategoryFactory.php
+    - database/factories/ShopFactory.php
+    - database/factories/ImageFactory.php
+    - database/factories/ReviewFactory.php
+    - database/migrations/2023_12_11_151612_create_categories_table.php
+    - database/migrations/2023_12_11_151613_create_shops_table.php
+    - database/migrations/2023_12_11_151614_create_images_table.php
+    - database/migrations/2023_12_11_151615_create_reviews_table.php
+    - database/migrations/2023_12_11_151616_create_category_shop_table.php
+    - database/migrations/2023_12_11_151617_create_service_shop_table.php
+    - app/Models/Category.php
+    - app/Models/Shop.php
+    - app/Models/Image.php
+    - app/Models/Review.php
+    - database/seeders/CategorySeeder.php
+    - tests/Feature/Http/Controllers/UserControllerTest.php
+    - tests/Feature/Http/Controllers/CategoryControllerTest.php
+    - tests/Feature/Http/Controllers/ShopControllerTest.php
+    - tests/Feature/Http/Controllers/ImageControllerTest.php
+    - tests/Feature/Http/Controllers/ReviewControllerTest.php
+    - app/Http/Requests/UserStoreRequest.php
+    - app/Http/Requests/UserUpdateRequest.php
+    - app/Http/Requests/CategoryStoreRequest.php
+    - app/Http/Requests/CategoryUpdateRequest.php
+    - app/Http/Requests/ShopStoreRequest.php
+    - app/Http/Requests/ShopUpdateRequest.php
+    - app/Http/Requests/ImageStoreRequest.php
+    - app/Http/Requests/ImageUpdateRequest.php
+    - app/Http/Requests/ReviewStoreRequest.php
+    - app/Http/Requests/ReviewUpdateRequest.php
+    - app/Http/Resources/UserCollection.php
+    - app/Http/Resources/UserResource.php
+    - app/Http/Resources/CategoryCollection.php
+    - app/Http/Resources/CategoryResource.php
+    - app/Http/Resources/ShopCollection.php
+    - app/Http/Resources/ShopResource.php
+    - app/Http/Resources/ImageCollection.php
+    - app/Http/Resources/ImageResource.php
+    - app/Http/Resources/ReviewCollection.php
+    - app/Http/Resources/ReviewResource.php
+updated:
+    - routes/api.php
+models:
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string nullable' }
+    Category: { name: 'string:50 unique', slug: 'string:50 unique', is_active: 'boolean default:true', relationships: { belongsToMany: Shop } }
+    Shop: { owner_id: 'id foreign:users', name: string, description: string, is_active: 'boolean default:true', relationships: { belongsToMany: 'Category, Service', morphMany: 'Image, Review' } }
+    Image: { name: 'string nullable', path: 'string unique index', relationships: { morphTo: Imageable } }
+    Review: { reviewer_id: 'id foreign:users', rating: integer, comment: 'text nullable', relationships: { morphTo: Reviewable } }

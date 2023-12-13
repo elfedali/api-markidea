@@ -1,0 +1,42 @@
+models:
+  Category:
+    name: string:50 unique
+    slug: string:50 unique
+    is_active: boolean default:true
+    relationships:
+      belongsToMany: Shop
+
+  Shop:
+    owner_id: id foreign:users
+    name: string
+    description: string
+    is_active: boolean default:true
+    relationships:
+      belongsToMany: Category, Service
+      morphMany: Image, Review
+  Image:
+    name: string nullable
+    path: string unique index
+    relationships:
+      morphTo: Imageable
+
+  Review:
+    reviewer_id: id foreign:users
+    rating: integer
+    comment: text nullable
+    relationships:
+      morphTo: Reviewable
+
+seeders: Category
+
+controllers:
+  User:
+    resource: api
+  Category:
+    resource: api
+  Shop:
+    resource: api
+  Image:
+    resource: api
+  Review:
+    resource: api
